@@ -22,6 +22,9 @@ function clickContConsent(){
 }
 
 function showSlider(){
+    // always start inactive
+    $('#slider').addClass('inactiveSlider');
+    $('#slider').removeClass('activeSlider');
     $('#slider').on('click input',
         function(){
             var val = $('#slider').prop('value');
@@ -31,11 +34,16 @@ function showSlider(){
             // var dynamColor = 'linear-gradient(90deg, red ' + val + '%, blue ' + val + '%)'; // to color left and right of slider
             // $('.activeSlider').css('background',dynamColor); 
             $('#catch-button').prop('disabled',false);
+            $('#next').prop('disabled', false);
         });
 }
 
 function showQ(){
     $('#question').html(expt.stimOrder[trial.number-1]);
+}
+
+function showAgent() {
+
 }
 
 
@@ -45,7 +53,9 @@ function trialStart(){
     $('#round').html('Round ' + trial.number + " of " + expt.totalTrials);
     trial.startTime = new Date().getTime(); //reset start of trial time
     showQ();
+    showAgent();
     showSlider();
+    $('#next').prop('disabled', true);
 }
 
 
