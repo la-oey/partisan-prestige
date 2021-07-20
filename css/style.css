@@ -1,12 +1,12 @@
 
-#slider {
+.slider {
     -webkit-appearance: none;
     margin: 18px 0;
     width: 100%;
 }
 
 
-#slider::-webkit-slider-runnable-track {
+.slider::-webkit-slider-runnable-track {
     height: 8.4px;
     cursor: pointer;
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
@@ -14,7 +14,7 @@
     border: 0.2px solid #010101;
 }
 
-#slider::-webkit-slider-thumb {
+.slider::-webkit-slider-thumb {
     height: 36px;
     width: 16px;
     border-radius: 3px;
@@ -24,14 +24,14 @@
     margin-top: -14px;
 }
 
-#slider::-moz-range-track {
+.slider::-moz-range-track {
     cursor: pointer;
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     border-radius: 1.3px;
     border: 0.2px solid #010101;
 }
 
-#slider::-moz-range-thumb {
+.slider::-moz-range-thumb {
     height: 36px;
     border-radius: 3px;
     background: gray;
@@ -80,20 +80,36 @@
 
 
 #sliderContainer {
-    width: 700px;
-    /*display: none;*/
+    position: relative;
+    width: 600px;
 }
 
-#slider {
+#agentSliderContainer {
+    position: relative;
+    width: 60%;
+    margin-left: 20%;
+}
+
+.slider {
     width: 100%;
 }
 
 .min {
     float: left;
+    display: inline-block;
+    position: absolute;
+    left: -50%;
+    width: 100%;
+    text-align: center;
 }
 
 .max {
     float: right;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    text-align: center;
 }
 
 #correctSlider {
@@ -188,16 +204,35 @@ body {
 }
 
 
-#agent {
-    height: 200px;
-    width: 70%;
+#questionContainer {
     background-color: yellow;
+    width: 60%;
+    min-width: 500px;
+    padding: 0.2em;
 }
 
 
 
+#agent {
+    height: 160px;
+    width: 60%;
+    min-width: 500px;
+    margin: 2em;
+}
 
+#agentVisual {
+    width: 30%;
+    height: 100%;
+    float: left;
+    border: 1px solid black;
+}
 
+#agentInfoContainer {
+    width: 60%;
+    height: 100%;
+    float: right;
+    text-align: left;
+}
 
 
 

@@ -1,7 +1,8 @@
 
 
 function pageLoad(){
-    expt.stimOrder = shuffle(stim);
+    expt.qOrder = shuffle(q);
+    expt.agentOrder = shuffle(agent);
     clicksMap[expt.startPage]();
 }
 
@@ -23,14 +24,14 @@ function clickContConsent(){
 
 function showSlider(){
     // always start inactive
-    $('#slider').addClass('inactiveSlider');
-    $('#slider').removeClass('activeSlider');
-    $('#slider').on('click input',
+    $('#responseSlider').addClass('inactiveSlider');
+    $('#responseSlider').removeClass('activeSlider');
+    $('#responseSlider').on('click input',
         function(){
-            var val = $('#slider').prop('value');
+            var val = $('#responseSlider').prop('value');
 
-            $('#slider').removeClass('inactiveSlider');
-            $('#slider').addClass('activeSlider');
+            $('#responseSlider').removeClass('inactiveSlider');
+            $('#responseSlider').addClass('activeSlider');
             // var dynamColor = 'linear-gradient(90deg, red ' + val + '%, blue ' + val + '%)'; // to color left and right of slider
             // $('.activeSlider').css('background',dynamColor); 
             $('#catch-button').prop('disabled',false);
@@ -39,11 +40,15 @@ function showSlider(){
 }
 
 function showQ(){
-    $('#question').html(expt.stimOrder[trial.number-1]);
+    $('#question').html(expt.qOrder[trial.number-1]);
 }
 
 function showAgent() {
-
+    $('#agentInfo').html('Party: '+expt.agentOrder[trial.number-1]['party']);
+    $('#agentInfo').append('<br> Followers: '+expt.agentOrder[trial.number-1]['prestige']);
+    $('#agentInfo').append('<br><br> Voted: <br>');
+    var s = $("#agentSlider").slider();
+    s.slider('value', expt.agentOrder[trial.number-1]['vote']);
 }
 
 
@@ -78,7 +83,7 @@ function trialDone(){
     saveData();
     
     // if we are done with all trials, then go to completed page
-    if(trial.number == expt.totalTrials){
+    if(trial.number == expt.totalTrial){
         $('#trial').css('display', 'none');
         $('#completed').css('display','block');
     } else {
@@ -94,7 +99,10 @@ function recordData(){
     // record what the subject did in json format
     trialData.push({
         trialNumber: trial.number,
-        trialStim: trial.stim,
+        trialStim: trial.q,
+        //trialAgentParty: trial.agent['party'],
+        //trialAgentPrestige: trial.agent['prestige'],
+        //trialAgentVote: trial.agent['vote'],
         startTime: trial.startTime
     });
 }

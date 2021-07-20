@@ -6,6 +6,8 @@
 <head>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src='js/helpers/lodash.js'></script>
     <script type="text/javascript" src='js/client.js'></script>
     <script type="text/javascript" src='js/vars.js'></script>
@@ -40,20 +42,42 @@
         <!-- stimuli presentation -->
         
         <!-- question -->
-        <p id="question"></p>
+        <div id="questionContainer">
+            <p id='question'></p>
+        </div>
 
         <!-- influencer agent -->
         <div id='agent'>
-            <p> show fake agent, prestige, vote </p>
+            <div id='agentVisual'>
+                <span> icon or some visual indicator of agent here </span>
+            </div>
+            <div id='agentInfoContainer'>
+                <span id='agentInfo'> </span>
+                <div id='agentSliderContainer'>
+                    <input id='agentSlider' class='slider activeSlider' type='range' min='0' max='100' value=''><br>
+                    <div class="min">
+                        <span style='text-align: center;'>I completely disagree</span>
+                    </div>
+                    <div class="max">
+                        <span style='text-align: center;'>I completely agree</span>
+                    </div>
+                </div>
+            </div>
         </div>
         
+        <p> How much do you agree with this statement? </p>
+
         <div id="sliderContainer">
-            <input id='slider' class='inactiveSlider' type='range' min='0' max='100' value=''><br>
-            <div class="min"><p>I disagree</p></div>
-            <div class="max"><p>I agree</p></div>
+            <input id='responseSlider' class='slider inactiveSlider' type='range' min='0' max='100' value=''><br>
+            <div class="min">
+                <span style='text-align: center;'>I completely disagree</span>
+            </div>
+            <div class="max">
+                <span style='text-align: center;'>I completely agree</span>
+            </div>
         </div>
     </center>
-    <br><br><br><br>
+    <br><br><br>
     <button class="hover-button big-button" id="next" type="button" onclick="trialDone();">Next!</button>
 </div>
 
