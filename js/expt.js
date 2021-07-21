@@ -44,17 +44,19 @@ function showQ(){
 }
 
 function showAgent() {
-    $('#agentInfo').html('Party: '+expt.agentOrder[trial.number-1]['party']);
+    let party = expt.agentOrder[trial.number-1]['party'];
+    $('#agentInfo').html('Party: '+party);
     $('#agentInfo').append('<br> Followers: '+expt.agentOrder[trial.number-1]['prestige']);
     $('#agentInfo').append('<br><br> Voted: <br>');
-    var s = $("#agentSlider").slider();
-    s.slider('value', expt.agentOrder[trial.number-1]['vote']);
+    $('#agentSlider').val(expt.agentOrder[trial.number-1]['vote']);
+    $('#agentSlider').prop('disabled', 'true');
+    let color = party == "Democrat" ? "blue" : "red";
+    $("<style type='text/css'>#agentSlider::-webkit-slider-thumb{background:" + color + "}</style>").appendTo($("head"));
 }
 
 
 function trialStart(){
     $('#trial').css('display','block');
-    //$('#next').attr('disabled',true);
     $('#round').html('Round ' + trial.number + " of " + expt.totalTrials);
     trial.startTime = new Date().getTime(); //reset start of trial time
     showQ();
