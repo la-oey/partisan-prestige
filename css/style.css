@@ -112,10 +112,10 @@
     text-align: center;
 }
 
-#correctSlider {
+/*#correctSlider {
     position: absolute;
     left: 54%;
-}
+}*/
 
 
 .pic {
@@ -221,14 +221,14 @@ body {
 }
 
 #agentVisual {
-    width: 30%;
+    width: 20%;
     height: 100%;
     float: left;
     border: 1px solid black;
 }
 
 #agentInfoContainer {
-    width: 60%;
+    width: 70%;
     height: 100%;
     float: right;
     text-align: left;

@@ -22,6 +22,15 @@ function clickContConsent(){
     trialStart();
 }
 
+
+
+
+
+
+function sampleAgent(){
+    // sample agent prestige and voting pattern?
+}
+
 function showSlider(){
     // always start inactive
     $('#responseSlider').addClass('inactiveSlider');
@@ -40,17 +49,19 @@ function showSlider(){
 }
 
 function showQ(){
-    $('#question').html(expt.qOrder[trial.number-1]);
+    trial.q = expt.qOrder[trial.number-1];
+    $('#question').html(trial.q);
 }
 
 function showAgent() {
-    let party = expt.agentOrder[trial.number-1]['party'];
+    trial.agent = expt.agentOrder[trial.number-1]
+    let party = trial.agent['party'];
     $('#agentInfo').html('Party: '+party);
-    $('#agentInfo').append('<br> Followers: '+expt.agentOrder[trial.number-1]['prestige']);
+    $('#agentInfo').append('<br> Followers: '+trial.agent['prestige']);
     $('#agentInfo').append('<br><br> Voted: <br>');
-    $('#agentSlider').val(expt.agentOrder[trial.number-1]['vote']);
+    $('#agentSlider').val(trial.agent['vote']);
     $('#agentSlider').prop('disabled', 'true');
-    let color = party == "Democrat" ? "blue" : "red";
+    let color = party == "Democrat" ? "blue" : "red"; // set slider color to red or blue
     $("<style type='text/css'>#agentSlider::-webkit-slider-thumb{background:" + color + "}</style>").appendTo($("head"));
 }
 
@@ -102,10 +113,11 @@ function recordData(){
     trialData.push({
         trialNumber: trial.number,
         trialStim: trial.q,
-        //trialAgentParty: trial.agent['party'],
-        //trialAgentPrestige: trial.agent['prestige'],
-        //trialAgentVote: trial.agent['vote'],
-        startTime: trial.startTime
+        trialAgentParty: trial.agent['party'],
+        trialAgentPrestige: trial.agent['prestige'],
+        trialAgentVote: trial.agent['vote'],
+        startTime: trial.startTime,
+        trialTime: trial.totalTime
     });
 }
 

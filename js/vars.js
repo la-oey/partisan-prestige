@@ -1,7 +1,7 @@
 var expt = { //add conditions here
     saveURL: 'submit.simple.php',
     startPage: 'trial', // {'consent','trial'}
-    totalTrials: 4, //adjust to how many trials you have
+    totalTrials: q.length, //adjust to how many trials you have
     nStimTrial: 3,
     debug: true, //set to false when ready to run
     stimOrder: []
