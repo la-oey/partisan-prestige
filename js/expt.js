@@ -15,7 +15,8 @@ function genAgents(){
         let pi = parties[p];
         for(var f=0; f<q.length/2; f++){
             let fiLvl = followers[f % 2];
-            let fi = fiLvl == "low" ? randomDouble(1, 400) : randomDouble(400, 2400); // make adjustments to this
+            let fi = fiLvl == "low" ? "-" : "+"; // make adjustments to this
+            fi = fi + Math.floor(randomDouble(50,500));
             let vo = randomDouble(0, 100); // random voting -- algorithm?
             agent.push({ 'party' : pi, 'prestigeLvl' : fiLvl, 'prestige' : fi, 'vote' : vo });
         }
@@ -51,6 +52,7 @@ function showTransitionJoin() {
 function clickTransitionJoin(){
     $('#join').css('display', 'none');
     $('#instruct1').css('display', 'block');
+    submitDemo();
 }
 
 function showTransitionTrial(){
@@ -101,7 +103,7 @@ function showAgent() {
     trial.agent = agentOrder[trial.number-1]
     let party = trial.agent['party'];
     $('#agentInfo').html('Party: '+party);
-    $('#agentInfo').append('<br> Followers: '+trial.agent['prestige']);
+    $('#agentInfo').append('<br> Follower Score: '+trial.agent['prestige']);
     $('#agentInfo').append('<br><br> Voted: <br>');
     $('#agentSlider').val(trial.agent['vote']);
     $('#agentSlider').prop('disabled', 'true');
