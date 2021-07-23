@@ -1,10 +1,10 @@
 
 
 function pageLoad(){
-    expt.qOrder = shuffle(q);
-    expt.priorOrder = sample_without_replacement(q.length / 2, q);
+    qOrder = shuffle(q);
+    priorOrder = sample_without_replacement(q.length / 2, q);
     genAgents();
-    expt.agentOrder = shuffle(agent);
+    agentOrder = shuffle(agent);
     clicksMap[expt.startPage]();
 }
 
@@ -78,13 +78,17 @@ function showSlider(){
 }
 
 function showQ(){
-    trial.q = expt.qOrder[trial.number-1];
-    $('#question').html(trial.q);
+    if(trial.block == "priors"){
+        trial.q = priorOrder[trial.number-1];
+    } else{
+        trial.q = qOrder[trial.number-1];
+    }
+    $('#question').html(trial.q["belief"]);
 }
 
 function showAgent() {
     $('#agent').css('display','block');
-    trial.agent = expt.agentOrder[trial.number-1]
+    trial.agent = agentOrder[trial.number-1]
     let party = trial.agent['party'];
     $('#agentInfo').html('Party: '+party);
     $('#agentInfo').append('<br> Followers: '+trial.agent['prestige']);
@@ -155,7 +159,9 @@ function recordData(){
     trialData.push({
         trialNumber: trial.number,
         trialBlock: trial.block,
-        trialStim: trial.q,
+        question: trial.q["belief"],
+        qAgreement: trial.q["agreement"],
+        qTruthiness: trial.q["truthiness"],
         agentParty: trial.agent['party'],
         agentPrestige: trial.agent['prestige'],
         agentVote: trial.agent['vote'],
@@ -163,7 +169,6 @@ function recordData(){
         startTime: trial.startTime,
         trialTime: trial.totalTime
     });
-    console.log(trialData)
 }
 
 function experimentDone(){
