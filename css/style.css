@@ -162,6 +162,7 @@ body {
 
 .screen {
     display: none;
+    text-align: center;
 }
 
 .hover-button {
@@ -212,12 +213,15 @@ body {
 }
 
 
+.content {
+    width: 60%;
+    min-width: 500px;
+    margin: auto;
+    padding: 1em;
+}
 
 #agent {
     height: 160px;
-    width: 60%;
-    min-width: 500px;
-    margin: 2em;
 }
 
 #agentVisual {
