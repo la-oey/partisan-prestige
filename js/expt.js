@@ -3,8 +3,23 @@
 function pageLoad(){
     expt.qOrder = shuffle(q);
     expt.priorOrder = sample_without_replacement(q.length / 2, q);
+    genAgents();
     expt.agentOrder = shuffle(agent);
     clicksMap[expt.startPage]();
+}
+
+function genAgents(){
+    let parties = ["Democrat", "Republican"];
+    let followers = ["high", "low"];
+    for(var p=0; p<parties.length; p++){
+        let pi = parties[p];
+        for(var f=0; f<q.length/2; f++){
+            let fiLvl = followers[f % 2];
+            let fi = fiLvl == "low" ? randomDouble(1, 400) : randomDouble(400, 2400); // make adjustments to this
+            let vo = randomDouble(0, 100); // random voting -- algorithm?
+            agent.push({ 'party' : pi, 'prestigeLvl' : fiLvl, 'prestige' : fi, 'vote' : vo });
+        }
+    }
 }
 
 function loadConsent(){
@@ -178,6 +193,10 @@ function shuffle(array){ //shuffle list of objects
     return_array.push(tornado.splice(randomIndex, 1)[0]);
   }
   return return_array;   
+}
+
+function randomDouble(min, max){
+    return Math.random() * (max - min) + min;
 }
 
 function sample_without_replacement(sampleSize, sample){
