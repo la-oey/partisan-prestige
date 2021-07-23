@@ -1,9 +1,10 @@
 var expt = { //add conditions here
     saveURL: 'submit.simple.php',
     startPage: 'consent', // {'consent','instruction','prior','join','transition','trial'}
+    condition: ['control','test'], // {'control', 'test'}
     blocks: ['priors','trial'],
-    priorTrials: q.length/2,
-    totalTrials: q.length, //adjust to how many trials you have
+    priorTrials: 16,
+    totalTrials: 32, //adjust to how many trials you have
     nStimTrial: 3,
     debug: false //set to false when ready to run
 };

@@ -1,8 +1,10 @@
 
 
 function pageLoad(){
-    qOrder = shuffle(q);
-    priorOrder = sample_without_replacement(q.length / 2, q);
+    let allQ = q.test.concat(q.filler); //combine filler and test questions
+    qOrder = shuffle(allQ);
+    priorOrder = shuffle(q.test);
+    expt.condition = Array.isArray(expt.condition) ? sample(expt.condition) : expt.condition; //randomly assign condition
     genAgents();
     agentOrder = shuffle(agent);
     clicksMap[expt.startPage]();
@@ -118,7 +120,11 @@ function trialStart(){
     trial.startTime = new Date().getTime(); //reset start of trial time
     showQ();
     if(trial.block == "trial"){
-        showAgent();
+        if(expt.condition == "test"){
+            showAgent();
+        } else{
+            $('#agent').css('display','none');
+        }
         $('#round').html('Round ' + trial.number + " of " + expt.totalTrials);
     } else {
         $('#agent').css('display','none');
@@ -201,6 +207,9 @@ function experimentDone(){
    //////// Helper Functions ////////
   //////////////////////////////////
 
+function sample(set) {
+    return (set[Math.floor(Math.random() * set.length)]);
+}
 
 function shuffle(array){ //shuffle list of objects
   var tornado = array.slice(0);
