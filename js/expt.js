@@ -43,12 +43,22 @@ function clickInstruction(){
     trialStart();
 }
 
-function showTransition(){
+function showTransitionJoin() {
     $('#trial').css('display', 'none');
+    $('#join').css('display', 'block');
+}
+
+function clickTransitionJoin(){
+    $('#join').css('display', 'none');
     $('#instruct1').css('display', 'block');
 }
 
-function clickTransition(){
+function showTransitionTrial(){
+    $('#join').css('display', 'none');
+    $('#instruct1').css('display', 'block');
+}
+
+function clickTransitionTrial(){
     $('#instruct1').css('display', 'none');
     trial.block = "trial";
     trialStart();
@@ -142,7 +152,7 @@ function trialDone(){
         $('#completed').css('display','block');
     } else {
         if(trial.block == "priors" && trial.number == expt.priorTrials) {
-            showTransition();
+            showTransitionJoin();
             trial.number = 1;
         } else{
             // increase trial number

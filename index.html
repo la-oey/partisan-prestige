@@ -38,10 +38,53 @@
 
 <div id="instruct0" class="screen">
     <p class="mtitle">Instructions</p>
-    <p>For the first part, you'll be asked to rate how much you agree or disagree with a statement.</p>
-    <button class="hover-button big-button" id="transition" onclick="clickInstruction();">Continue</button>
+    <div class='content'>
+        <p> Thank you for your interest in participating! Your participation will take part in two parts. </p>
+        <p> In the first part, you will be asked to fill out a questionnaire on your beliefs about a series of questions and statements. <p>
+        <p> In the second part, you will take part in an online game with several other participants. In this game, you will be asked to rate the extent to which you agree with a series of statements that will be shown to you. </p>
+        <p> In both parts, you will use a slider to decide between a <b><i>strongly disagree</i></b> and <b><i>strongly agree</i></b>. If you are neutral, you should choose the mid-point between the two. For example, you might be asked whether vanilla is the best ice cream flavour. You will use a slider to choose any point between <b><i>strongly agree</i></b>, meaning that you are 100% certain that vanilla is <i>not</i> the best flavour, or <b><i>strongly agree</i></b>, meaning that you are 100% certain that vanilla <i>is</i> the best ice cream flavour. </p>
+    </div>
+
+    <button class="hover-button big-button" id="transition" onclick="clickInstruction();">Begin Part 1</button>
 </div>
 
+
+<div id='join' class='screen'>
+    <p class="mtitle">Instructions</p>
+    <div class='content'>
+        <p>Now, you will join an online network with other participants where you will get to see what they thought about various statements as well.<p>
+        <p> Create your profile by filling out the information below. </p>
+        <br>
+        <div style='text-align: left'>
+        <form action="">
+            <p>1. What is your political affiliation? <br> <br>
+            <input type="radio" id="democrat" name="party" value="Democrat">
+            <label for="democrat">Democrat</label> &emsp;
+            <input type="radio" id="republican" name="party" value="Republican">
+            <label for="republican">Republican</label> &emsp;
+            <input type="radio" id="independent" name="party" value="Independent">
+            <label for="independent">Independent</label>
+            </p>
+
+            <br>
+          
+            <p>2. Approximately how many social media “followers” or “friends” do you have, combined, on all social media platforms? These could include Instagram, Twitter or TikTok followers, and/or LinkedIn or Facebook contacts. <br>
+            <center><input type="number" id="followers" name="followers" min="0" max="99999"></center>
+            </p>
+        </form>
+        </div>
+    </div>
+
+    <button class="hover-button big-button" id="transition" onclick="clickTransitionJoin();">Continue</button>
+</div>
+
+<div id="instruct1" class="screen">
+    <p class="mtitle">Part 2</p>
+    <div class='content'>
+        <p>Great! Now, you will see what someone else in the network says about some statement, and then be asked to rate how much you agree or disagree.</p>
+    </div>
+    <button class="hover-button big-button" id="transition" onclick="clickTransitionTrial();">Begin Part 2</button>
+</div>
 
 <div id="trial" class="screen">
     <p class="mtitle" id="round">Round</p>
@@ -54,7 +97,7 @@
         </div>
 
         <!-- influencer agent -->
-        <div id='agent'>
+        <div id='agent' class='content'>
             <img id='agentVisual' src="img/agent.png">
             <div id='agentInfoContainer'>
                 <span id='agentInfo'> </span>
@@ -85,12 +128,6 @@
     </center>
     <br><br><br>
     <button class="hover-button big-button" id="next" type="button" onclick="trialDone();">Next!</button>
-</div>
-
-<div id="instruct1" class="screen">
-    <p class="mtitle">Next section</p>
-    <p>Now, you'll see what someone else says, and then rate how much you agree.</p>
-    <button class="hover-button big-button" id="transition" onclick="clickTransition();">Continue</button>
 </div>
 
 <div id="completed" class="screen">
