@@ -104,10 +104,10 @@ function submitExternal(client){
 			postSona(client);
 			break;
 		case 'visitor':
-			window.location = "https://madlab.ucsd.edu/experiments/";
+			window.location = "https://http://www.evullab.org/";
 			break;
 		default:
-			window.location = "https://madlab.ucsd.edu/experiments/";
+			window.location = "https://http://www.evullab.org//";
 	}
 }
 

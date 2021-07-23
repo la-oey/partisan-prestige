@@ -1,4 +1,7 @@
 var clicksMap = {
 	"consent": loadConsent,
-	"trial": trialStart	
+	"instruction": clickConsent,
+	"prior": trialStart,
+	"transition": showTransition,
+	"trial": clickTransition
 }

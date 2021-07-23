@@ -33,8 +33,15 @@
         <input type="radio" class="prescreening" name="consent" value="no"> I <b>DO NOT</b> agree to participate.
     </p></center>
 
-    <button class="hover-button big-button" id="continueConsent" onclick="clickContConsent();"> Click to continue to study</button>
+    <button class="hover-button big-button" id="continueConsent" onclick="clickConsent();"> Click to continue to study</button>
 </div>
+
+<div id="instruct0" class="screen">
+    <p class="mtitle">Instructions</p>
+    <p>For the first part, you'll be asked to rate how much you agree or disagree with a statement.</p>
+    <button class="hover-button big-button" id="transition" onclick="clickInstruction();">Continue</button>
+</div>
+
 
 <div id="trial" class="screen">
     <p class="mtitle" id="round">Round</p>
@@ -49,17 +56,15 @@
         <!-- influencer agent -->
         <div id='agent'>
             <img id='agentVisual' src="img/agent.png">
-                <!-- <img src="img/agent.png"> -->
-            <!-- </div> -->
             <div id='agentInfoContainer'>
                 <span id='agentInfo'> </span>
                 <div id='agentSliderContainer'>
                     <input id='agentSlider' class='slider activeSlider' type='range' min='0' max='100' value=''><br>
                     <div class="min">
-                        <span style='text-align: center;'>I completely disagree</span>
+                        <span style='text-align: center;'><p>Strongly disagree</p></span>
                     </div>
                     <div class="max">
-                        <span style='text-align: center;'>I completely agree</span>
+                        <span style='text-align: center;'><p>Strongly agree</p></span>
                     </div>
                 </div>
             </div>
@@ -71,15 +76,21 @@
         <div id="sliderContainer">
             <input id='responseSlider' class='slider inactiveSlider' type='range' min='0' max='100' value=''><br>
             <div class="min">
-                <span style='text-align: center;'>I completely disagree</span>
+                <span style='text-align: center;'><p>Strongly disagree</p></span>
             </div>
             <div class="max">
-                <span style='text-align: center;'>I completely agree</span>
+                <span style='text-align: center;'><p>Strongly agree</p></span>
             </div>
         </div>
     </center>
     <br><br><br>
     <button class="hover-button big-button" id="next" type="button" onclick="trialDone();">Next!</button>
+</div>
+
+<div id="instruct1" class="screen">
+    <p class="mtitle">Next section</p>
+    <p>Now, you'll see what someone else says, and then rate how much you agree.</p>
+    <button class="hover-button big-button" id="transition" onclick="clickTransition();">Continue</button>
 </div>
 
 <div id="completed" class="screen">

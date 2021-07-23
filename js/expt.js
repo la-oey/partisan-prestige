@@ -2,6 +2,7 @@
 
 function pageLoad(){
     expt.qOrder = shuffle(q);
+    expt.priorOrder = sample_without_replacement(q.length / 2, q);
     expt.agentOrder = shuffle(agent);
     clicksMap[expt.startPage]();
 }
@@ -17,12 +18,26 @@ function loadConsent(){
         });
 }
 
-function clickContConsent(){
+function clickConsent(){
     $('#consent').css('display','none');
+    $('#instruct0').css('display', 'block');
+}
+
+function clickInstruction(){
+    $('#instruct0').css('display', 'none');
     trialStart();
 }
 
+function showTransition(){
+    $('#trial').css('display', 'none');
+    $('#instruct1').css('display', 'block');
+}
 
+function clickTransition(){
+    $('#instruct1').css('display', 'none');
+    trial.block = "trial";
+    trialStart();
+}
 
 
 
@@ -32,18 +47,17 @@ function sampleAgent(){
 }
 
 function showSlider(){
+    $('#next').prop('disabled', true);
     // always start inactive
     $('#responseSlider').addClass('inactiveSlider');
     $('#responseSlider').removeClass('activeSlider');
     $('#responseSlider').on('click input',
         function(){
-            var val = $('#responseSlider').prop('value');
-
             $('#responseSlider').removeClass('inactiveSlider');
             $('#responseSlider').addClass('activeSlider');
+            // var val = $('#responseSlider').prop('value');
             // var dynamColor = 'linear-gradient(90deg, red ' + val + '%, blue ' + val + '%)'; // to color left and right of slider
             // $('.activeSlider').css('background',dynamColor); 
-            $('#catch-button').prop('disabled',false);
             $('#next').prop('disabled', false);
         });
 }
@@ -54,6 +68,7 @@ function showQ(){
 }
 
 function showAgent() {
+    $('#agent').css('display','block');
     trial.agent = expt.agentOrder[trial.number-1]
     let party = trial.agent['party'];
     $('#agentInfo').html('Party: '+party);
@@ -68,10 +83,17 @@ function showAgent() {
 
 function trialStart(){
     $('#trial').css('display','block');
-    $('#round').html('Round ' + trial.number + " of " + expt.totalTrials);
+    
     trial.startTime = new Date().getTime(); //reset start of trial time
     showQ();
-    showAgent();
+    if(trial.block == "trial"){
+        showAgent();
+        $('#round').html('Round ' + trial.number + " of " + expt.totalTrials);
+    } else {
+        $('#agent').css('display','none');
+        $('#round').html('Round ' + trial.number + " of " + expt.priorTrials);
+    }
+    
     showSlider();
     $('#next').prop('disabled', true);
 }
@@ -96,14 +118,19 @@ function trialDone(){
     saveData();
     
     // if we are done with all trials, then go to completed page
-    if(trial.number == expt.totalTrial){
+    if(trial.number == expt.totalTrials){
         $('#trial').css('display', 'none');
         $('#completed').css('display','block');
     } else {
-        // increase trial number
-        ++trial.number;
+        if(trial.block == "priors" && trial.number == expt.priorTrials) {
+            showTransition();
+            trial.number = 1;
+        } else{
+            // increase trial number
+            ++trial.number;
+            trialStart();
+        }
         trial.endTime = null;
-        trialStart();
     }
 }
 
@@ -112,13 +139,16 @@ function recordData(){
     // record what the subject did in json format
     trialData.push({
         trialNumber: trial.number,
+        trialBlock: trial.block,
         trialStim: trial.q,
-        trialAgentParty: trial.agent['party'],
-        trialAgentPrestige: trial.agent['prestige'],
-        trialAgentVote: trial.agent['vote'],
+        agentParty: trial.agent['party'],
+        agentPrestige: trial.agent['prestige'],
+        agentVote: trial.agent['vote'],
+        response: $('#responseSlider').val(),
         startTime: trial.startTime,
         trialTime: trial.totalTime
     });
+    console.log(trialData)
 }
 
 function experimentDone(){
@@ -149,6 +179,17 @@ function shuffle(array){ //shuffle list of objects
   }
   return return_array;   
 }
+
+function sample_without_replacement(sampleSize, sample){
+  var urn = sample.slice(0);
+  var return_sample = [];
+  for(var i=0; i<sampleSize; i++){
+    var randomIndex = Math.floor(Math.random()*urn.length);
+    return_sample.push(urn.splice(randomIndex, 1)[0]);
+  }
+  return return_sample;
+}
+
 
 function debugLog(message) {
     if(expt.debug){
