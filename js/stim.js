@@ -135,7 +135,7 @@ var q = {
         "truthiness": "subjective"
     }
     ]
-}
+};
 
 var agent = [
     // {

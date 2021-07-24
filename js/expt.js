@@ -15,7 +15,7 @@ function genAgents(){
     let followers = ["high", "low"];
     for(var p=0; p<parties.length; p++){
         let pi = parties[p];
-        for(var f=0; f<q.length/2; f++){
+        for(var f=0; f<expt.totalTrials/2; f++){
             let fiLvl = followers[f % 2];
             let fi = fiLvl == "low" ? "-" : "+"; // make adjustments to this
             fi = fi + Math.floor(randomDouble(50,500));
@@ -101,16 +101,24 @@ function showQ(){
 }
 
 function showAgent() {
+    $('#sliderContainer').css('display','none');
     $('#agent').css('display','block');
-    trial.agent = agentOrder[trial.number-1]
+    trial.agent = agentOrder[trial.number-1];
     let party = trial.agent['party'];
-    $('#agentInfo').html('Party: '+party);
-    $('#agentInfo').append('<br> Follower Score: '+trial.agent['prestige']);
-    $('#agentInfo').append('<br><br> Voted: <br>');
+    let color = party == "Democrat" ? "#0D1DA8" : "#A80D0D"; // set slider color to red or blue
+    $('#agentInfo').html('Party: <b style="color:'+color+'">'+party + '</b>');
+    $('#agentInfo').append('<br>Follower Score: <b style="color:'+color+'">'+trial.agent['prestige']+"</b>");
+    $('#agentInfo').append("<span id='xAgentSpan'><button id='xAgent' onclick='closeAgent();'>&#xd7</button></span>");
     $('#agentSlider').val(trial.agent['vote']);
     $('#agentSlider').prop('disabled', 'true');
-    let color = party == "Democrat" ? "blue" : "red"; // set slider color to red or blue
     $("<style type='text/css'>#agentSlider::-webkit-slider-thumb{background:" + color + "}</style>").appendTo($("head"));
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    $('#agentVisual').css('background-color', "#"+randomColor);
+}
+
+function closeAgent(){
+    $('#agent').css('display','none');
+    $('#sliderContainer').css('display','block');
 }
 
 
